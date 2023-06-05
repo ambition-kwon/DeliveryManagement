@@ -24,16 +24,49 @@ import ManageScreen19 from './ManageScreen/ManageScreen19';
 import ManageScreen20 from './ManageScreen/ManageScreen20';
 import ManageScreen21 from './ManageScreen/ManageScreen21';
 import ManageScreen22 from './ManageScreen/ManageScreen22';
+import ManageScreen23 from './ManageScreen/ManageScreen23';
+import ManageScreen24 from './ManageScreen/ManageScreen24';
+import ManageScreen25 from './ManageScreen/ManageScreen25';
 
 function RootStack() {
   const stack = createNativeStackNavigator();
   return (
     <stack.Navigator>
       <stack.Screen
+        name={'Manage25'}
+        component={ManageScreen25}
+        options={{
+          headerTitle: '안면사진확인',
+          headerStyle: {
+            backgroundColor: '#FEF3E7',
+          },
+        }}
+      />
+      <stack.Screen
+        name={'Manage24'}
+        component={ManageScreen24}
+        options={{
+          headerTitle: '택배 통합 조회',
+          headerStyle: {
+            backgroundColor: '#FEF3E7',
+          },
+        }}
+      />
+      <stack.Screen
+        name={'Manage23'}
+        component={ManageScreen23}
+        options={{
+          headerTitle: '거주자 정보 추가',
+          headerStyle: {
+            backgroundColor: '#FEF3E7',
+          },
+        }}
+      />
+      <stack.Screen
         name={'Manage22'}
         component={ManageScreen22}
         options={{
-          headerTitle: '',
+          headerTitle: '거주자 정보 관리',
           headerStyle: {
             backgroundColor: '#FEF3E7',
           },
