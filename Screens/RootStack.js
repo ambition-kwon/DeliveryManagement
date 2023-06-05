@@ -12,15 +12,119 @@ import ManageScreen7 from './ManageScreen/ManageScreen7';
 import ManageScreen8 from './ManageScreen/ManageScreen8';
 import ManageScreen9 from './ManageScreen/ManageScreen9';
 import ManageScreen10 from './ManageScreen/ManageScreen10';
-import manageScreen11 from './ManageScreen/ManageScreen11';
+import ManageScreen11 from './ManageScreen/ManageScreen11';
+import ManageScreen12 from './ManageScreen/ManageScreen12';
+import ManageScreen13 from './ManageScreen/ManageScreen13';
+import ManageScreen14 from './ManageScreen/ManageScreen14';
+import ManageScreen15 from './ManageScreen/ManageScreen15';
+import ManageScreen16 from './ManageScreen/ManageScreen16';
+import ManageScreen17 from './ManageScreen/ManageScreen17';
+import ManageScreen18 from './ManageScreen/ManageScreen18';
+import ManageScreen19 from './ManageScreen/ManageScreen19';
+import ManageScreen20 from './ManageScreen/ManageScreen20';
+import ManageScreen21 from './ManageScreen/ManageScreen21';
+import ManageScreen22 from './ManageScreen/ManageScreen22';
 
 function RootStack() {
   const stack = createNativeStackNavigator();
   return (
     <stack.Navigator>
       <stack.Screen
+        name={'Manage22'}
+        component={ManageScreen22}
+        options={{
+          headerTitle: '',
+          headerStyle: {
+            backgroundColor: '#FEF3E7',
+          },
+        }}
+      />
+      <stack.Screen
+        name={'Manage9'}
+        component={ManageScreen9}
+        options={{
+          headerTitle: '',
+          headerStyle: {
+            backgroundColor: '#FEF3E7',
+          },
+        }}
+      />
+      <stack.Screen
+        name={'Manage21'}
+        component={ManageScreen21}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage20'}
+        component={ManageScreen20}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage19'}
+        component={ManageScreen19}
+        options={{
+          headerTitle: '',
+          headerStyle: {
+            backgroundColor: '#FEF3E7',
+          },
+        }}
+      />
+      <stack.Screen
+        name={'Manage18'}
+        component={ManageScreen18}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage17'}
+        component={ManageScreen17}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage16'}
+        component={ManageScreen16}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage15'}
+        component={ManageScreen15}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage14'}
+        component={ManageScreen14}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage13'}
+        component={ManageScreen13}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage12'}
+        component={ManageScreen12}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
         name={'Manage11'}
-        component={manageScreen11}
+        component={ManageScreen11}
         options={{
           headerShown: false,
         }}
@@ -28,13 +132,6 @@ function RootStack() {
       <stack.Screen
         name={'Manage10'}
         component={ManageScreen10}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <stack.Screen
-        name={'Manage9'}
-        component={ManageScreen9}
         options={{
           headerShown: false,
         }}

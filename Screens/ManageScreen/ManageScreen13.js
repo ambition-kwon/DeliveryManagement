@@ -4,7 +4,7 @@ import {RNCamera} from 'react-native-camera';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 
-function ManageScreen10() {
+function ManageScreen13() {
   const cameraRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
 
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ManageScreen10;
+export default ManageScreen13;
