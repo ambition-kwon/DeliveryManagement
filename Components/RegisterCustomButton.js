@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-function LoginCustomButton({onPress, title}) {
+function RegisterCustomButton({onPress, title}) {
   return (
     <TouchableOpacity
       style={styles.button}
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginCustomButton;
+export default RegisterCustomButton;

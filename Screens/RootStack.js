@@ -11,11 +11,27 @@ import ManageScreen6 from './ManageScreen/ManageScreen6';
 import ManageScreen7 from './ManageScreen/ManageScreen7';
 import ManageScreen8 from './ManageScreen/ManageScreen8';
 import ManageScreen9 from './ManageScreen/ManageScreen9';
+import ManageScreen10 from './ManageScreen/ManageScreen10';
+import manageScreen11 from './ManageScreen/ManageScreen11';
 
 function RootStack() {
   const stack = createNativeStackNavigator();
   return (
     <stack.Navigator>
+      <stack.Screen
+        name={'Manage11'}
+        component={manageScreen11}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Manage10'}
+        component={ManageScreen10}
+        options={{
+          headerShown: false,
+        }}
+      />
       <stack.Screen
         name={'Manage9'}
         component={ManageScreen9}
