@@ -10,8 +10,10 @@ import {
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import RegisterCustomButton from '../../Components/RegisterCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen1() {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -43,9 +45,19 @@ function ManageScreen1() {
         <TouchableOpacity activeOpacity={0.7} style={styles.password}>
           <Text style={styles.text2}>비밀번호를 잊으셨습니까?</Text>
         </TouchableOpacity>
-        <LoginCustomButton title={'로그인'} onPress={null} />
+        <LoginCustomButton
+          title={'로그인'}
+          onPress={() => {
+            navigation.reset({routes: [{name: 'Manage3'}]});
+          }}
+        />
         <View style={{height: 15}} />
-        <RegisterCustomButton title={'회원가입'} onPress={null} />
+        <RegisterCustomButton
+          title={'회원가입'}
+          onPress={() => {
+            navigation.navigate('Manage2');
+          }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

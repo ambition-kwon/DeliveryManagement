@@ -5,13 +5,14 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  TouchableOpacity,
+  Alert,
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
-import RegisterCustomButton from '../../Components/RegisterCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen2() {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -64,7 +65,25 @@ function ManageScreen2() {
           keyboardType={'number-pad'}
           secureTextEntry={false}
         />
-        <LoginCustomButton title={'회원가입'} onPress={null} />
+        <LoginCustomButton
+          title={'회원가입'}
+          onPress={() => {
+            Alert.alert(
+              '알림',
+              '회원가입에 성공하였습니다',
+              [
+                {
+                  text: '확인',
+                  style: 'default',
+                  onPress: () => {
+                    navigation.pop();
+                  },
+                },
+              ],
+              {cancelable: true},
+            );
+          }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

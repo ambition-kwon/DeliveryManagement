@@ -27,11 +27,30 @@ import ManageScreen22 from './ManageScreen/ManageScreen22';
 import ManageScreen23 from './ManageScreen/ManageScreen23';
 import ManageScreen24 from './ManageScreen/ManageScreen24';
 import ManageScreen25 from './ManageScreen/ManageScreen25';
+import MainTab from './MainTab';
 
 function RootStack() {
   const stack = createNativeStackNavigator();
   return (
-    <stack.Navigator>
+    <stack.Navigator
+      screenOptions={{
+        headerTintColor: 'black',
+      }}>
+      <stack.Screen
+        name={'Select'}
+        component={SelectScreen}
+        options={{
+          headerTitle: '',
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'MainTab'}
+        component={MainTab}
+        options={{
+          headerShown: false,
+        }}
+      />
       <stack.Screen
         name={'Manage25'}
         component={ManageScreen25}
@@ -248,13 +267,6 @@ function RootStack() {
           headerStyle: {
             backgroundColor: '#FEF3E7',
           },
-        }}
-      />
-      <stack.Screen
-        name={'Select'}
-        component={SelectScreen}
-        options={{
-          headerShown: false,
         }}
       />
     </stack.Navigator>

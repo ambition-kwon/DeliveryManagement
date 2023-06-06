@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function NoticeScreen1() {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -54,7 +56,12 @@ function NoticeScreen1() {
           keyboardType={'number-pad'}
           secureTextEntry={false}
         />
-        <LoginCustomButton title={'로그인'} onPress={null} />
+        <LoginCustomButton
+          title={'로그인'}
+          onPress={() => {
+            navigation.navigate('MainTab');
+          }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

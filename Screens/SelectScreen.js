@@ -1,18 +1,30 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 
 function SelectScreen() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text1}>이용하실 시스템을 선택해주세요</Text>
       <View style={{height: 68}} />
-      <TouchableOpacity style={styles.subContainer} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.subContainer}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('Notice1');
+        }}>
         <Text style={styles.text2}>알림</Text>
         <Text style={styles.text2}>시스템</Text>
       </TouchableOpacity>
       <View style={{height: 115}} />
-      <TouchableOpacity style={styles.subContainer} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.subContainer}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('Manage1');
+        }}>
         <Text style={styles.text2}>관리</Text>
         <Text style={styles.text2}>시스템</Text>
       </TouchableOpacity>
