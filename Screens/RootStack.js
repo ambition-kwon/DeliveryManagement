@@ -37,17 +37,17 @@ function RootStack() {
         headerTintColor: 'black',
       }}>
       <stack.Screen
-        name={'Select'}
-        component={SelectScreen}
+        name={'MainTab'}
+        component={MainTab}
         options={{
-          headerTitle: '',
           headerShown: false,
         }}
       />
       <stack.Screen
-        name={'MainTab'}
-        component={MainTab}
+        name={'Select'}
+        component={SelectScreen}
         options={{
+          headerTitle: '',
           headerShown: false,
         }}
       />

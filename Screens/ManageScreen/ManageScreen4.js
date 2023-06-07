@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  TouchableOpacity,
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
-import RegisterCustomButton from '../../Components/RegisterCustomButton';
+import {useNavigation} from '@react-navigation/native';
+import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen4() {
+  const navigation = useNavigation();
+  const {setToken} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -48,7 +50,13 @@ function ManageScreen4() {
           keyboardType={'number-pad'}
           secureTextEntry={false}
         />
-        <LoginCustomButton title={'로그인'} onPress={null} />
+        <LoginCustomButton
+          title={'로그인'}
+          onPress={() => {
+            setToken('수취인로그인토큰');
+            navigation.navigate('Manage7');
+          }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

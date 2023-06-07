@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, StyleSheet, Image, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
+import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen18() {
+  const navigation = useNavigation();
+  const {setToken} = useContext(DataContext);
   return (
     <SafeAreaView style={styles.container}>
       <Image source={require('../../assets/Successmark.png')} />
@@ -18,7 +22,10 @@ function ManageScreen18() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={null}
+        onPress={() => {
+          setToken('');
+          navigation.reset({routes: [{name: 'Manage3'}]});
+        }}
         activeOpacity={0.7}>
         <Text style={styles.text}>없음</Text>
       </TouchableOpacity>

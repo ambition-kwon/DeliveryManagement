@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
+import DataContext from '../../Contexts/DataContext';
 
 function NoticeScreen4() {
   const navigation = useNavigation();
+  const {setToken} = useContext(DataContext);
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -41,6 +43,7 @@ function NoticeScreen4() {
         activeOpacity={0.7}
         style={styles.logout}
         onPress={() => {
+          setToken('');
           navigation.reset({routes: [{name: 'Select'}]});
         }}>
         <Text style={styles.text6}>로그아웃</Text>

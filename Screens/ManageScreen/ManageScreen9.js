@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
+import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen9() {
+  const navigation = useNavigation();
+  const {setToken} = useContext(DataContext);
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text1}>사용하실 기능을 선택해주세요</Text>
@@ -14,7 +18,12 @@ function ManageScreen9() {
       <TouchableOpacity style={styles.subContainer} activeOpacity={0.7}>
         <Text style={styles.text2}>거주자 관리</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.7} onPress={null}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => {
+          setToken('');
+          navigation.reset({routes: [{name: 'Select'}]});
+        }}>
         <View style={{height: 100}} />
         <Text style={styles.text3}>
           택배 관리 시스템을 종료하고 싶으신가요?
