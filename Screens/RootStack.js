@@ -45,6 +45,13 @@ function RootStack() {
         }}
       />
       <stack.Screen
+        name={'Manage7'}
+        component={ManageScreen7}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <stack.Screen
         name={'MainTab'}
         component={MainTab}
         options={{
@@ -191,13 +198,6 @@ function RootStack() {
       <stack.Screen
         name={'Manage8'}
         component={ManageScreen8}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <stack.Screen
-        name={'Manage7'}
-        component={ManageScreen7}
         options={{
           headerShown: false,
         }}

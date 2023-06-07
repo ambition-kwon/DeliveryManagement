@@ -3,8 +3,9 @@ import {View, Text, StyleSheet} from 'react-native';
 import Item19 from '../../Components/Item19';
 import {useNavigation} from '@react-navigation/native';
 
-function ManageScreen19() {
+function ManageScreen19({route}) {
   const navigation = useNavigation();
+  const Deliverer = route.params ? route.params.Deliverer : null;
   return (
     <View style={styles.container}>
       <Text style={styles.text1}>수거하실 택배를 선택해주세요</Text>

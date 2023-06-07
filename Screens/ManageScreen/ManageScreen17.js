@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
@@ -12,8 +11,11 @@ import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 
-function ManageScreen17() {
+function ManageScreen17({route}) {
   const navigation = useNavigation();
+  const {Deliverer, barcodeData} = route.params ? route.params : null;
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -25,8 +27,8 @@ function ManageScreen17() {
         <View style={{height: 80}} />
         <CustomInput
           placeholder={'이름(예. 홍길동)'}
-          value={null}
-          onChangeText={null}
+          value={name}
+          onChangeText={setName}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={false}
@@ -34,8 +36,8 @@ function ManageScreen17() {
         <View style={{height: 30}} />
         <CustomInput
           placeholder={'호실(예. 201)'}
-          value={null}
-          onChangeText={null}
+          value={address}
+          onChangeText={setAddress}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={false}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -12,11 +12,13 @@ import CustomInput from '../../Components/CustomInput';
 import {RNCamera} from 'react-native-camera';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
+import DataContext from '../../Contexts/DataContext';
 
-function ManageScreen11() {
+function ManageScreen11({route}) {
   const [barcodeData, setBarcodeData] = useState(null);
   const navigation = useNavigation();
-
+  const {Resident, capturedImage} = route.params ? route.params : null;
+  const {token} = useContext(DataContext);
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
     console.log(result.data);

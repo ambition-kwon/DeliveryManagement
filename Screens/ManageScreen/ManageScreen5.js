@@ -59,7 +59,7 @@ function ManageScreen5() {
           title={'로그인'}
           onPress={() => {
             setToken('배달인로그인토큰');
-            navigation.navigate('Manage8');
+            navigation.navigate('Manage8', {Deliverer});
           }}
         />
       </View>

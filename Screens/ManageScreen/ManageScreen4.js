@@ -59,7 +59,7 @@ function ManageScreen4() {
           title={'로그인'}
           onPress={() => {
             setToken('수취인로그인토큰');
-            navigation.navigate('Manage7');
+            navigation.navigate('Manage7', {Resident});
           }}
         />
       </View>
