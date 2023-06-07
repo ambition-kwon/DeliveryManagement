@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,10 @@ import DataContext from '../../Contexts/DataContext';
 function ManageScreen6() {
   const navigation = useNavigation();
   const {setToken} = useContext(DataContext);
+  const [Admin, setAdmin] = useState({
+    id: '',
+    password: '',
+  });
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -29,16 +33,16 @@ function ManageScreen6() {
         <View style={{height: 44}} />
         <CustomInput
           placeholder={'아이디'}
-          value={null}
-          onChangeText={null}
+          value={Admin.id}
+          onChangeText={text => setAdmin({...Admin, id: text})}
           autoComplete={'email'}
           keyboardType={'email-address'}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder={'비밀번호'}
-          value={null}
-          onChangeText={null}
+          value={Admin.password}
+          onChangeText={text => setAdmin({...Admin, password: text})}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={true}

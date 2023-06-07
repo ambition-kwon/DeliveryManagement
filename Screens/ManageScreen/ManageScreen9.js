@@ -11,11 +11,21 @@ function ManageScreen9() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.text1}>사용하실 기능을 선택해주세요</Text>
       <View style={{height: 85}} />
-      <TouchableOpacity style={styles.subContainer} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.subContainer}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('Manage24');
+        }}>
         <Text style={styles.text2}>택배 통합 조회</Text>
       </TouchableOpacity>
       <View style={{height: 136}} />
-      <TouchableOpacity style={styles.subContainer} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.subContainer}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('Manage22');
+        }}>
         <Text style={styles.text2}>거주자 관리</Text>
       </TouchableOpacity>
       <TouchableOpacity

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,12 @@ import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen2() {
   const navigation = useNavigation();
+  const [Admin, setAdmin] = useState({
+    id: '',
+    password: '',
+    residence: '',
+    zipcode: '',
+  });
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -27,16 +33,16 @@ function ManageScreen2() {
         <View style={{height: 44}} />
         <CustomInput
           placeholder={'아이디'}
-          value={null}
-          onChangeText={null}
+          value={Admin.id}
+          onChangeText={text => setAdmin({...Admin, id: text})}
           autoComplete={'email'}
           keyboardType={'email-address'}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder={'비밀번호'}
-          value={null}
-          onChangeText={null}
+          value={Admin.password}
+          onChangeText={text => setAdmin({...Admin, password: text})}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={true}
@@ -51,16 +57,16 @@ function ManageScreen2() {
         />
         <CustomInput
           placeholder={'거주지명(예. 제주대학교 기숙사 4호관)'}
-          value={null}
-          onChangeText={null}
+          value={Admin.residence}
+          onChangeText={text => setAdmin({...Admin, residence: text})}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder={'거주지 우편번호(예. 63243)'}
-          value={null}
-          onChangeText={null}
+          value={Admin.zipcode}
+          onChangeText={text => setAdmin({...Admin, zipcode: text})}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={false}

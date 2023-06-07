@@ -11,9 +11,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomInput from '../../Components/CustomInput';
 import {RNCamera} from 'react-native-camera';
 import LoginCustomButton from '../../Components/LoginCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen20() {
   const [barcodeData, setBarcodeData] = useState(null);
+  const navigation = useNavigation();
 
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
@@ -43,7 +45,12 @@ function ManageScreen20() {
             keyboardType={'number-pad'}
             secureTextEntry={false}
           />
-          <LoginCustomButton title={'확인'} onPress={null} />
+          <LoginCustomButton
+            title={'확인'}
+            onPress={() => {
+              navigation.navigate('Manage21');
+            }}
+          />
         </SafeAreaView>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>

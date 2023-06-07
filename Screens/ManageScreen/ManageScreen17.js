@@ -10,8 +10,10 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen17() {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -38,7 +40,12 @@ function ManageScreen17() {
           keyboardType={'number-pad'}
           secureTextEntry={false}
         />
-        <LoginCustomButton title={'등록'} onPress={null} />
+        <LoginCustomButton
+          title={'등록'}
+          onPress={() => {
+            navigation.navigate('Manage18');
+          }}
+        />
         <View style={{height: 40}} />
       </SafeAreaView>
     </TouchableWithoutFeedback>

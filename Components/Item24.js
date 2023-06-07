@@ -18,12 +18,14 @@ function Item24({one, two, three, four, five, onPress}) {
         }>
         {five}
       </Text>
-      <TouchableOpacity
-        style={styles.subContainer2}
-        activeOpacity={0.7}
-        onPress={onPress}>
-        <Text style={styles.text7}>안면사진확인</Text>
-      </TouchableOpacity>
+      {five === '수취대기' ? null : (
+        <TouchableOpacity
+          style={styles.subContainer2}
+          activeOpacity={0.7}
+          onPress={onPress}>
+          <Text style={styles.text7}>안면사진확인</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }

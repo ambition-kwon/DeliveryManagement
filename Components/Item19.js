@@ -1,12 +1,12 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-function Item19({one, two, three}) {
+function Item19({one, two, three, onPress}) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       style={styles.container}
-      onPress={null}>
+      onPress={onPress}>
       <Text style={styles.text1}>{one}</Text>
       <Text style={styles.text1}>{two}</Text>
       <Text style={three === '수거대기' ? styles.text2 : styles.text3}>

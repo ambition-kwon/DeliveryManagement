@@ -1,17 +1,29 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen8() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text1}>사용하실 기능을 선택해주세요</Text>
       <View style={{height: 85}} />
-      <TouchableOpacity style={styles.subContainer} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.subContainer}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('Manage16');
+        }}>
         <Text style={styles.text2}>택배등록</Text>
       </TouchableOpacity>
       <View style={{height: 136}} />
-      <TouchableOpacity style={styles.subContainer} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.subContainer}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('Manage19');
+        }}>
         <Text style={styles.text2}>택배수거</Text>
       </TouchableOpacity>
     </SafeAreaView>

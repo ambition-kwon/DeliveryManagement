@@ -16,7 +16,9 @@ function ManageScreen21() {
       <View style={{height: 40}} />
       <TouchableOpacity
         style={styles.button}
-        onPress={null}
+        onPress={() => {
+          navigation.navigate('Manage19');
+        }}
         activeOpacity={0.7}>
         <Text style={styles.text}>있음</Text>
       </TouchableOpacity>

@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import Item24 from '../../Components/Item24';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen24() {
+  const navigation = useNavigation();
   // 이걸로 modal과 연동시키기
   const [selectedItem, setSelectedItem] = useState(null);
   ///////////////////////
@@ -76,7 +78,10 @@ function ManageScreen24() {
               <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.accept}
-                onPress={null}>
+                onPress={() => {
+                  navigation.navigate('Manage25');
+                  handleCloseModal();
+                }}>
                 <Text style={styles.text5}>확인</Text>
               </TouchableOpacity>
             </View>

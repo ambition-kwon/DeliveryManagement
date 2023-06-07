@@ -62,7 +62,7 @@ function NoticeScreen1() {
           title={'로그인'}
           onPress={() => {
             setToken('수취인로그인토큰');
-            navigation.navigate('MainTab');
+            navigation.reset({routes: [{name: 'MainTab'}]});
           }}
         />
       </View>

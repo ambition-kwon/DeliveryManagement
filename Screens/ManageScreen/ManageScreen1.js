@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,10 @@ import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen1() {
   const navigation = useNavigation();
+  const [Admin, setAdmin] = useState({
+    id: '',
+    password: '',
+  });
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -28,16 +32,16 @@ function ManageScreen1() {
         <View style={{height: 44}} />
         <CustomInput
           placeholder={'아이디'}
-          value={null}
-          onChangeText={null}
+          value={Admin.id}
+          onChangeText={text => setAdmin({...Admin, id: text})}
           autoComplete={'email'}
           keyboardType={'email-address'}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder={'비밀번호'}
-          value={null}
-          onChangeText={null}
+          value={Admin.password}
+          onChangeText={text => setAdmin({...Admin, password: text})}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={true}

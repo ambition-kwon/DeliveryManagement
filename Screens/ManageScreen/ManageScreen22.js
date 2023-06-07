@@ -2,8 +2,10 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Item22 from '../../Components/Item22';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen22() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={{height: 20}} />
@@ -15,7 +17,12 @@ function ManageScreen22() {
       <Item22 one={'201'} two={'권혁원'} three={'970426'} />
       <Item22 one={'202'} two={'권혁준'} three={'990815'} />
       <Item22 one={'203'} two={'안예원'} three={'950101'} />
-      <TouchableOpacity style={styles.add} activeOpacity={0.7} onPress={null}>
+      <TouchableOpacity
+        style={styles.add}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('Manage23');
+        }}>
         <Icon name={'add'} size={40} color={'white'} />
       </TouchableOpacity>
     </View>

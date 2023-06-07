@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,11 @@ import DataContext from '../../Contexts/DataContext';
 function ManageScreen4() {
   const navigation = useNavigation();
   const {setToken} = useContext(DataContext);
+  const [Resident, setResident] = useState({
+    name: '',
+    address: '',
+    birth: '',
+  });
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -28,24 +33,24 @@ function ManageScreen4() {
         <View style={{height: 44}} />
         <CustomInput
           placeholder={'이름(예. 홍길동)'}
-          value={null}
-          onChangeText={null}
+          value={Resident.name}
+          onChangeText={text => setResident({...Resident, name: text})}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder={'주민등록번호 앞 6자리(예. 970426)'}
-          value={null}
-          onChangeText={null}
+          value={Resident.birth}
+          onChangeText={text => setResident({...Resident, birth: text})}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={true}
         />
         <CustomInput
           placeholder={'거주 호실(예. 201)'}
-          value={null}
-          onChangeText={null}
+          value={Resident.address}
+          onChangeText={text => setResident({...Resident, address: text})}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={false}

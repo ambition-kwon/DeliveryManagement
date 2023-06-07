@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen23() {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -43,7 +45,12 @@ function ManageScreen23() {
             keyboardType={'number-pad'}
             secureTextEntry={false}
           />
-          <LoginCustomButton title={'등록완료'} onPress={null} />
+          <LoginCustomButton
+            title={'등록완료'}
+            onPress={() => {
+              navigation.pop();
+            }}
+          />
           <View style={{height: 50}} />
         </View>
       </KeyboardAvoidingView>

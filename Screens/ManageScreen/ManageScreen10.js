@@ -3,10 +3,12 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LoginCustomButton from '../../Components/LoginCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen10() {
   const cameraRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
+  const navigation = useNavigation();
 
   const handleCaptureButtonPress = async () => {
     if (cameraRef.current) {
@@ -34,7 +36,12 @@ function ManageScreen10() {
         />
       )}
       {capturedImage ? (
-        <LoginCustomButton title={'완료'} onPress={null} />
+        <LoginCustomButton
+          title={'완료'}
+          onPress={() => {
+            navigation.navigate('Manage11');
+          }}
+        />
       ) : (
         <LoginCustomButton title={'촬영'} onPress={handleCaptureButtonPress} />
       )}
