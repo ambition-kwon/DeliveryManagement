@@ -6,19 +6,17 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 import DataContext from '../../Contexts/DataContext';
+import axios from 'axios';
 
 function ManageScreen6() {
   const navigation = useNavigation();
-  const {setToken} = useContext(DataContext);
-  const [Admin, setAdmin] = useState({
-    id: '',
-    password: '',
-  });
+  const {setToken, Admin, setAdmin} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -53,8 +51,27 @@ function ManageScreen6() {
         <LoginCustomButton
           title={'로그인'}
           onPress={() => {
-            setToken('대리인로그인토큰');
-            navigation.navigate('Manage9');
+            axios
+              .post('http://172.20.16.116:8080/managesys/relogin/admin', Admin)
+              .then(response => {
+                const val = response.data.accessToken;
+                setToken(`Bearer ${val}`);
+                navigation.navigate('Manage9');
+              })
+              .catch(error => {
+                Alert.alert(
+                  '알림',
+                  '로그인에 실패하였습니다',
+                  [
+                    {
+                      text: '확인',
+                      style: 'default',
+                      onPress: () => {},
+                    },
+                  ],
+                  {cancelable: true},
+                );
+              });
           }}
         />
       </View>

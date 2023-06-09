@@ -13,10 +13,9 @@ import {RNCamera} from 'react-native-camera';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 
-function ManageScreen16({route}) {
+function ManageScreen16() {
   const [barcodeData, setBarcodeData] = useState(null);
   const navigation = useNavigation();
-  const Deliverer = route.params ? route.params.Deliverer : null;
 
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
@@ -49,7 +48,7 @@ function ManageScreen16({route}) {
           <LoginCustomButton
             title={'확인'}
             onPress={() => {
-              navigation.navigate('Manage17', {Deliverer, barcodeData});
+              navigation.navigate('Manage17', {barcodeData});
             }}
           />
         </SafeAreaView>

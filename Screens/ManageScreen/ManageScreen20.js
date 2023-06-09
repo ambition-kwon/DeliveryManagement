@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,21 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomInput from '../../Components/CustomInput';
 import {RNCamera} from 'react-native-camera';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import DataContext from '../../Contexts/DataContext';
 
-function ManageScreen20() {
+function ManageScreen20({route}) {
   const [barcodeData, setBarcodeData] = useState(null);
   const navigation = useNavigation();
-
+  const checkBarcode = route.params ? route.params.item.trackingNumber : null;
+  const {token} = useContext(DataContext);
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
     console.log(result.data);
@@ -48,7 +52,37 @@ function ManageScreen20() {
           <LoginCustomButton
             title={'확인'}
             onPress={() => {
-              navigation.navigate('Manage21');
+              if (checkBarcode == barcodeData) {
+                axios
+                  .post(
+                    'http://172.20.16.116:8080/managesys/deliverer/parcel/pickup',
+                    {trackingNumber: barcodeData},
+                    {
+                      headers: {
+                        Authorization: token,
+                      },
+                    },
+                  )
+                  .then(response => {
+                    navigation.navigate('Manage21');
+                  })
+                  .catch(error => {
+                    console.error('에러:', error);
+                  });
+              } else {
+                Alert.alert(
+                  '알림',
+                  '바코드가 일치하지않습니다',
+                  [
+                    {
+                      text: '확인',
+                      style: 'default',
+                      onPress: () => {},
+                    },
+                  ],
+                  {cancelable: true},
+                );
+              }
             }}
           />
         </SafeAreaView>

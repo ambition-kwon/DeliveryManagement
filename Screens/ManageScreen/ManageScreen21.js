@@ -6,7 +6,7 @@ import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen21() {
   const navigation = useNavigation();
-  const {setToken} = useContext(DataContext);
+  const {setToken, setDeliverer} = useContext(DataContext);
   return (
     <SafeAreaView style={styles.container}>
       <Image source={require('../../assets/Successmark.png')} />
@@ -26,6 +26,11 @@ function ManageScreen21() {
         style={styles.button}
         onPress={() => {
           setToken('');
+          setDeliverer({
+            name: '',
+            id: '',
+            company: '',
+          });
           navigation.reset({routes: [{name: 'Manage3'}]});
         }}
         activeOpacity={0.7}>

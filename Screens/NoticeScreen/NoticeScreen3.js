@@ -1,31 +1,51 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, StyleSheet, FlatList} from 'react-native';
 import Item3 from '../../Components/Item3';
+import axios from 'axios';
+import DataContext from '../../Contexts/DataContext';
 
 function NoticeScreen3() {
+  const {token, Resident} = useContext(DataContext);
+  const [data, setData] = useState([]);
+  const [arrayData, setArrayData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post('http://172.20.16.116:8080/notifsys/home/history', Resident, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('에러:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const sortedData = data.sort(
+      (a, b) => new Date(b.localDateTime) - new Date(a.localDateTime),
+    );
+    setArrayData(sortedData);
+  }, [data]);
+
+  const renderItem = ({item}) => {
+    return (
+      <Item3
+        one={item.status}
+        two={item.company}
+        three={item.trackingNumber}
+        four={item.localDateTime.slice(0, 10)}
+        five={item.localDateTime.slice(11, 16)}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <Item3
-        one={'수취처리가 완료되었습니다.'}
-        two={'쿠팡'}
-        three={'88208301843'}
-        four={'2023-06-06'}
-        five={'10:54'}
-      />
-      <Item3
-        one={'반송처리가 완료되었습니다.'}
-        two={'CJ'}
-        three={'66208301843'}
-        four={'2023-06-04'}
-        five={'07:54'}
-      />
-      <Item3
-        one={'대리인이 안면사진을 확인하였습니다.'}
-        two={'확인사유'}
-        three={'2023-05-31일 분실건에 대한 조사'}
-        four={'2023-06-02'}
-        five={'18:54'}
-      />
+      <FlatList data={arrayData} renderItem={renderItem} style={styles.list} />
     </View>
   );
 }
@@ -36,6 +56,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: '#FEF3E7',
+  },
+  list: {
+    flex: 1,
   },
 });
 

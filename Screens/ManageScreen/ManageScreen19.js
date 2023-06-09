@@ -1,24 +1,53 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import Item19 from '../../Components/Item19';
 import {useNavigation} from '@react-navigation/native';
+import DataContext from '../../Contexts/DataContext';
+import axios from 'axios';
 
-function ManageScreen19({route}) {
+function ManageScreen19() {
+  useEffect(() => {
+    axios
+      .post(
+        'http://172.20.16.116:8080/managesys/deliverer/parcel/awaitingReturnList',
+        Deliverer,
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('에러:', error);
+      });
+  }, []);
   const navigation = useNavigation();
-  const Deliverer = route.params ? route.params.Deliverer : null;
+  const {Deliverer, token} = useContext(DataContext);
+  const [data, setData] = useState();
   return (
     <View style={styles.container}>
       <Text style={styles.text1}>수거하실 택배를 선택해주세요</Text>
-      <Item19
-        one={'2023-05-05'}
-        two={'8932684927'}
-        three={'수거대기'}
-        onPress={() => {
-          navigation.navigate('Manage20');
-        }}
-      />
-      <Item19 one={'2023-05-03'} two={'7732684927'} three={'수거완료'} />
-      <Item19 one={'2023-05-01'} two={'1132684927'} three={'수거완료'} />
+      {data[0] === '반송 수거 대상 택배가 없습니다.' ? null : (
+        <FlatList
+          data={data}
+          renderItem={({item}) => {
+            return (
+              <Item19
+                one={item.localDateTime.slice(0, 10)}
+                two={item.trackingNumber}
+                three={item.status}
+                onPress={() => {
+                  navigation.navigate('Manage20', {item});
+                }}
+              />
+            );
+          }}
+          style={styles.list}
+        />
+      )}
     </View>
   );
 }
@@ -35,6 +64,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 20,
     marginBottom: 35,
+  },
+  list: {
+    flex: 1,
   },
 });
 

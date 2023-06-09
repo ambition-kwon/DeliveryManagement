@@ -1,28 +1,40 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, StyleSheet, Text, FlatList} from 'react-native';
 import Item2 from '../../Components/Item2';
+import axios from 'axios';
+import DataContext from '../../Contexts/DataContext';
 
 function NoticeScreen2() {
+  useEffect(() => {
+    axios
+      .post('http://172.20.16.116:8080/notifsys/home', Resident, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('에러:', error);
+      });
+  }, []);
+  const {token, Resident} = useContext(DataContext);
+  const [data, setData] = useState();
+  const renderItem = ({item}) => {
+    return (
+      <Item2
+        one={item.localDateTime.slice(0, 10)}
+        two={item.company}
+        three={item.trackingNumber}
+        four={item.status}
+      />
+    );
+  };
+  ////////////////////////////////////////
   return (
     <View style={styles.container}>
-      <Item2
-        one={'2023-05-05'}
-        two={'쿠팡'}
-        three={'88208301843'}
-        four={'수취대기'}
-      />
-      <Item2
-        one={'2023-05-03'}
-        two={'쿠팡'}
-        three={'66888301843'}
-        four={'수취완료'}
-      />
-      <Item2
-        one={'2023-05-01'}
-        two={'쿠팡'}
-        three={'77808301843'}
-        four={'반송완료'}
-      />
+      <FlatList data={data} renderItem={renderItem} style={styles.list} />
     </View>
   );
 }
@@ -34,6 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#FEF3E7',
   },
+  list: {flex: 1},
 });
 
 export default NoticeScreen2;

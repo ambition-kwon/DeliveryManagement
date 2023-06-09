@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   subContainer1: {
-    width: 100,
+    width: 120,
     height: 30,
     backgroundColor: '#F2F2F2',
     alignItems: 'center',

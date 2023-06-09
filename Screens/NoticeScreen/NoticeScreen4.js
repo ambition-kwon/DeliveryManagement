@@ -1,12 +1,28 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import DataContext from '../../Contexts/DataContext';
+import axios from 'axios';
 
 function NoticeScreen4() {
+  useEffect(() => {
+    axios
+      .post('http://172.20.16.116:8080/notifsys/home/myInfo', Resident, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('에러:', error);
+      });
+  }, []);
   const navigation = useNavigation();
-  const {setToken} = useContext(DataContext);
+  const {setToken, Resident, token, setResident} = useContext(DataContext);
+  const [data, setData] = useState();
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -15,26 +31,25 @@ function NoticeScreen4() {
             <Icon name={'person'} size={30} color={'white'} />
           </View>
           <View>
-            <Text style={styles.text1}>홍길동</Text>
-            <Text style={styles.text2}>제주대학교 기숙사 4호관</Text>
-            <Text style={styles.text2}>212호</Text>
+            <Text style={styles.text1}>{Resident.name}</Text>
+            <Text style={styles.text2}>{Resident.address}</Text>
           </View>
         </View>
         <View style={styles.subBox2}>
           <View style={styles.subBox3}>
-            <Text style={styles.text3}>2</Text>
+            <Text style={styles.text3}>{data ? data['수취 대기'] : null}</Text>
             <Text style={styles.text5}>수취 대기</Text>
           </View>
           <View style={styles.subBox3}>
-            <Text style={styles.text4}>27</Text>
+            <Text style={styles.text4}>{data ? data['수취 완료'] : null}</Text>
             <Text style={styles.text5}>수취 완료</Text>
           </View>
           <View style={styles.subBox3}>
-            <Text style={styles.text3}>1</Text>
+            <Text style={styles.text3}>{data ? data['반송 대기'] : null}</Text>
             <Text style={styles.text5}>반송 대기</Text>
           </View>
           <View style={styles.subBox3}>
-            <Text style={styles.text4}>5</Text>
+            <Text style={styles.text4}>{data ? data['반송 완료'] : null}</Text>
             <Text style={styles.text5}>반송 완료</Text>
           </View>
         </View>
@@ -44,6 +59,12 @@ function NoticeScreen4() {
         style={styles.logout}
         onPress={() => {
           setToken('');
+          setResident({
+            name: '',
+            address: '',
+            birth: '',
+            zipcode: '',
+          });
           navigation.reset({routes: [{name: 'Select'}]});
         }}>
         <Text style={styles.text6}>로그아웃</Text>

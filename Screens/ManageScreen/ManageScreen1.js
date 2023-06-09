@@ -6,11 +6,13 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import RegisterCustomButton from '../../Components/RegisterCustomButton';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
 
 function ManageScreen1() {
   const navigation = useNavigation();
@@ -52,7 +54,25 @@ function ManageScreen1() {
         <LoginCustomButton
           title={'로그인'}
           onPress={() => {
-            navigation.reset({routes: [{name: 'Manage3'}]});
+            axios
+              .post('http://172.20.16.116:8080/managesys/firstlogin', Admin)
+              .then(response => {
+                navigation.reset({routes: [{name: 'Manage3'}]});
+              })
+              .catch(error => {
+                Alert.alert(
+                  '알림',
+                  '로그인에 실패하였습니다',
+                  [
+                    {
+                      text: '확인',
+                      style: 'default',
+                      onPress: () => {},
+                    },
+                  ],
+                  {cancelable: true},
+                );
+              });
           }}
         />
         <View style={{height: 15}} />

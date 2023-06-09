@@ -10,6 +10,7 @@ import {
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
 
 function ManageScreen2() {
   const navigation = useNavigation();
@@ -19,6 +20,7 @@ function ManageScreen2() {
     residence: '',
     zipcode: '',
   });
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -49,8 +51,8 @@ function ManageScreen2() {
         />
         <CustomInput
           placeholder={'비밀번호 재확인'}
-          value={null}
-          onChangeText={null}
+          value={passwordConfirm}
+          onChangeText={setPasswordConfirm}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={true}
@@ -74,20 +76,53 @@ function ManageScreen2() {
         <LoginCustomButton
           title={'회원가입'}
           onPress={() => {
-            Alert.alert(
-              '알림',
-              '회원가입에 성공하였습니다',
-              [
-                {
-                  text: '확인',
-                  style: 'default',
-                  onPress: () => {
-                    navigation.pop();
+            if (Admin.password !== passwordConfirm) {
+              Alert.alert(
+                '알림',
+                '비밀번호를 재확인해 주세요',
+                [
+                  {
+                    text: '확인',
+                    style: 'default',
+                    onPress: () => {},
                   },
-                },
-              ],
-              {cancelable: true},
-            );
+                ],
+                {cancelable: true},
+              );
+            } else {
+              axios
+                .post('http://172.20.16.116:8080/managesys/adminJoin', Admin)
+                .then(response => {
+                  Alert.alert(
+                    '알림',
+                    '회원가입에 성공하였습니다',
+                    [
+                      {
+                        text: '확인',
+                        style: 'default',
+                        onPress: () => {
+                          navigation.pop();
+                        },
+                      },
+                    ],
+                    {cancelable: true},
+                  );
+                })
+                .catch(error => {
+                  Alert.alert(
+                    '알림',
+                    '회원가입에 실패하였습니다',
+                    [
+                      {
+                        text: '확인',
+                        style: 'default',
+                        onPress: () => {},
+                      },
+                    ],
+                    {cancelable: true},
+                  );
+                });
+            }
           }}
         />
       </View>

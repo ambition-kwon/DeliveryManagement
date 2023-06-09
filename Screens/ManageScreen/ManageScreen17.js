@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -10,12 +10,31 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen17({route}) {
   const navigation = useNavigation();
-  const {Deliverer, barcodeData} = route.params ? route.params : null;
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
+  const {barcodeData} = route.params ? route.params : null;
+  const {token} = useContext(DataContext);
+  const [data, setData] = useState({
+    trackingNumber: barcodeData,
+    name: '',
+    address: '',
+  });
+  const handleNameChange = text => {
+    setData(prevData => ({
+      ...prevData,
+      name: text,
+    }));
+  };
+
+  const handleAddressChange = text => {
+    setData(prevData => ({
+      ...prevData,
+      address: text,
+    }));
+  };
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -27,8 +46,8 @@ function ManageScreen17({route}) {
         <View style={{height: 80}} />
         <CustomInput
           placeholder={'이름(예. 홍길동)'}
-          value={name}
-          onChangeText={setName}
+          value={data.name}
+          onChangeText={handleNameChange}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={false}
@@ -36,8 +55,8 @@ function ManageScreen17({route}) {
         <View style={{height: 30}} />
         <CustomInput
           placeholder={'호실(예. 201)'}
-          value={address}
-          onChangeText={setAddress}
+          value={data.address}
+          onChangeText={handleAddressChange}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={false}
@@ -45,7 +64,22 @@ function ManageScreen17({route}) {
         <LoginCustomButton
           title={'등록'}
           onPress={() => {
-            navigation.navigate('Manage18');
+            axios
+              .post(
+                'http://172.20.16.116:8080/managesys/deliverer/parcel/registration',
+                data,
+                {
+                  headers: {
+                    Authorization: token,
+                  },
+                },
+              )
+              .then(response => {
+                navigation.navigate('Manage18');
+              })
+              .catch(error => {
+                console.error('에러:', error);
+              });
           }}
         />
         <View style={{height: 40}} />

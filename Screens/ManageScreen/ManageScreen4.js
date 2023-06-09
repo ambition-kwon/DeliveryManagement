@@ -5,20 +5,17 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 import DataContext from '../../Contexts/DataContext';
+import axios from 'axios';
 
 function ManageScreen4() {
   const navigation = useNavigation();
-  const {setToken} = useContext(DataContext);
-  const [Resident, setResident] = useState({
-    name: '',
-    address: '',
-    birth: '',
-  });
+  const {setToken, Resident, setResident} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -58,8 +55,30 @@ function ManageScreen4() {
         <LoginCustomButton
           title={'로그인'}
           onPress={() => {
-            setToken('수취인로그인토큰');
-            navigation.navigate('Manage7', {Resident});
+            axios
+              .post(
+                'http://172.20.16.116:8080/managesys/login/resident',
+                Resident,
+              )
+              .then(response => {
+                const val = response.data.accessToken;
+                setToken(`Bearer ${val}`);
+                navigation.navigate('Manage7');
+              })
+              .catch(error => {
+                Alert.alert(
+                  '알림',
+                  '로그인에 실패하였습니다',
+                  [
+                    {
+                      text: '확인',
+                      style: 'default',
+                      onPress: () => {},
+                    },
+                  ],
+                  {cancelable: true},
+                );
+              });
           }}
         />
       </View>

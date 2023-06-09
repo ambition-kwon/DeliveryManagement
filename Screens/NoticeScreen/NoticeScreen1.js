@@ -1,19 +1,21 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 import DataContext from '../../Contexts/DataContext';
+import axios from 'axios';
 
 function NoticeScreen1() {
   const navigation = useNavigation();
-  const {setToken} = useContext(DataContext);
+  const {setToken, Resident, setResident, token} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -28,32 +30,32 @@ function NoticeScreen1() {
         <View style={{height: 44}} />
         <CustomInput
           placeholder={'이름(예. 홍길동)'}
-          value={null}
-          onChangeText={null}
+          value={Resident.name}
+          onChangeText={text => setResident({...Resident, name: text})}
           autoComplete={'off'}
           keyboardType={'default'}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder={'주민등록번호 앞 6자리(예. 970426)'}
-          value={null}
-          onChangeText={null}
+          value={Resident.birth}
+          onChangeText={text => setResident({...Resident, birth: text})}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={true}
         />
         <CustomInput
-          placeholder={'거주 호실(예. 201)'}
-          value={null}
-          onChangeText={null}
+          placeholder={'거주 호실(예. 101동102호)'}
+          value={Resident.address}
+          onChangeText={text => setResident({...Resident, address: text})}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder={'거주지 우편번호(예. 63243)'}
-          value={null}
-          onChangeText={null}
+          value={Resident.zipcode}
+          onChangeText={text => setResident({...Resident, zipcode: text})}
           autoComplete={'off'}
           keyboardType={'number-pad'}
           secureTextEntry={false}
@@ -61,8 +63,27 @@ function NoticeScreen1() {
         <LoginCustomButton
           title={'로그인'}
           onPress={() => {
-            setToken('수취인로그인토큰');
-            navigation.reset({routes: [{name: 'MainTab'}]});
+            axios
+              .post('http://172.20.16.116:8080/notifsys/login', Resident)
+              .then(response => {
+                const val = response.data.accessToken;
+                setToken(`Bearer ${val}`);
+                navigation.reset({routes: [{name: 'MainTab'}]});
+              })
+              .catch(error => {
+                Alert.alert(
+                  '알림',
+                  '로그인에 실패하였습니다',
+                  [
+                    {
+                      text: '확인',
+                      style: 'default',
+                      onPress: () => {},
+                    },
+                  ],
+                  {cancelable: true},
+                );
+              });
           }}
         />
       </View>
