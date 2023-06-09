@@ -5,11 +5,10 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 
-function ManageScreen13({route}) {
+function ManageScreen13() {
   const cameraRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const navigation = useNavigation();
-  const Resident = route.params ? route.params.Resident : null;
   const handleCaptureButtonPress = async () => {
     if (cameraRef.current) {
       const options = {quality: 0.5, base64: true};
@@ -39,7 +38,7 @@ function ManageScreen13({route}) {
         <LoginCustomButton
           title={'완료'}
           onPress={() => {
-            navigation.navigate('Manage14', {Resident, capturedImage});
+            navigation.navigate('Manage14', {capturedImage});
           }}
         />
       ) : (

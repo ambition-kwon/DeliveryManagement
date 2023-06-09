@@ -28,6 +28,7 @@ import ManageScreen23 from './ManageScreen/ManageScreen23';
 import ManageScreen24 from './ManageScreen/ManageScreen24';
 import ManageScreen25 from './ManageScreen/ManageScreen25';
 import MainTab from './MainTab';
+import ShowFace from './ManageScreen/ShowFace';
 
 function RootStack() {
   const stack = createNativeStackNavigator();
@@ -42,6 +43,16 @@ function RootStack() {
         options={{
           headerTitle: '',
           headerShown: false,
+        }}
+      />
+      <stack.Screen
+        name={'Show'}
+        component={ShowFace}
+        options={{
+          headerTitle: '안면사진확인',
+          headerStyle: {
+            backgroundColor: '#FEF3E7',
+          },
         }}
       />
       <stack.Screen

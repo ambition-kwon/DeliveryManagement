@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,16 +6,32 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import Item24 from '../../Components/Item24';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen24() {
+  useEffect(() => {
+    axios
+      .post('http://172.20.16.116:8080/managesys/admin/parcel/showAll', {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('에러:', error);
+      });
+  }, []);
+  const {token, setSelectedItem} = useContext(DataContext);
+  const [data, setData] = useState();
   const navigation = useNavigation();
-  // 이걸로 modal과 연동시키기
-  const [selectedItem, setSelectedItem] = useState(null);
-  ///////////////////////
   const [modalVisible, setModalVisible] = useState(false);
   const handleOpenModal = () => {
     setModalVisible(true);
@@ -23,33 +39,25 @@ function ManageScreen24() {
   const handleCloseModal = () => {
     setModalVisible(false);
   };
+  const renderItem = ({item}) => {
+    return (
+      <Item24
+        one={item.residentName}
+        two={item.localDateTime.slice(0, 10)}
+        three={item.company}
+        four={item.trackingNumber}
+        five={item.status}
+        onPress={() => {
+          handleOpenModal();
+          setSelectedItem(item.trackingNumber);
+        }}
+      />
+    );
+  };
   return (
     <View style={styles.container}>
       <View style={{height: 20}} />
-      <Item24
-        one={'권혁원'}
-        two={'2023-05-05'}
-        three={'쿠팡'}
-        four={'88208301843'}
-        five={'수취대기'}
-        onPress={handleOpenModal}
-      />
-      <Item24
-        one={'권혁준'}
-        two={'2023-05-03'}
-        three={'CJ'}
-        four={'77208301843'}
-        five={'수취완료'}
-        onPress={handleOpenModal}
-      />
-      <Item24
-        one={'안예원'}
-        two={'2023-05-01'}
-        three={'우체국'}
-        four={'66208301843'}
-        five={'반송완료'}
-        onPress={handleOpenModal}
-      />
+      <FlatList data={data} renderItem={renderItem} style={styles.list} />
       <Modal
         visible={modalVisible}
         animationType="slide"
@@ -185,6 +193,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
     color: 'white',
+  },
+  list: {
+    flex: 1,
   },
 });
 

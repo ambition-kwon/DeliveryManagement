@@ -1,14 +1,14 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-function Item19({one, two, three}) {
+function Item22({one, two, three, onPress}) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       style={styles.container}
-      onPress={null}>
-      <Text style={styles.text1}>{one}호</Text>
-      <Text style={styles.text1}>{two}</Text>
+      onPress={onPress}>
+      <Text style={styles.text1}>{one}</Text>
+      <Text style={styles.text2}>{two}</Text>
       <Text style={styles.text1}>{three}</Text>
     </TouchableOpacity>
   );
@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  text2: {
+    fontSize: 16,
+    fontWeight: '500',
+    paddingRight: 40,
+  },
 });
 
-export default Item19;
+export default Item22;

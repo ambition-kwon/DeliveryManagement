@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 function ManageScreen25() {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -30,7 +32,12 @@ function ManageScreen25() {
           keyboardType={'default'}
           secureTextEntry={false}
         />
-        <LoginCustomButton title={'안면사진 확인'} onPress={null} />
+        <LoginCustomButton
+          title={'안면사진 확인'}
+          onPress={() => {
+            navigation.navigate('Show');
+          }}
+        />
         <View style={{height: 160}} />
       </View>
     </TouchableWithoutFeedback>

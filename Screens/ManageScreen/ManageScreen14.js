@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomInput from '../../Components/CustomInput';
@@ -13,12 +14,12 @@ import {RNCamera} from 'react-native-camera';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 import DataContext from '../../Contexts/DataContext';
+import axios from 'axios';
 
-function ManageScreen14({route}) {
+function ManageScreen14() {
   const [barcodeData, setBarcodeData] = useState(null);
   const navigation = useNavigation();
-  const {Resident, capturedImage} = route.params ? route.params : null;
-  const {token} = useContext(DataContext);
+  const {token, Resident} = useContext(DataContext);
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
     console.log(result.data);
@@ -50,7 +51,33 @@ function ManageScreen14({route}) {
           <LoginCustomButton
             title={'확인'}
             onPress={() => {
-              navigation.navigate('Manage15');
+              axios
+                .post(
+                  'http://172.20.16.116:8080/managesys/resident/awaitingReturn/trackingNumber',
+                  {trackingNumber: barcodeData},
+                  {
+                    headers: {
+                      Authorization: token,
+                    },
+                  },
+                )
+                .then(response => {
+                  navigation.navigate('Manage15');
+                })
+                .catch(error => {
+                  Alert.alert(
+                    '알림',
+                    '바코드를 확인해주시기 바랍니다',
+                    [
+                      {
+                        text: '확인',
+                        style: 'default',
+                        onPress: () => {},
+                      },
+                    ],
+                    {cancelable: true},
+                  );
+                });
             }}
           />
         </SafeAreaView>

@@ -3,9 +3,8 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 
-function ManageScreen7({route}) {
+function ManageScreen7() {
   const navigation = useNavigation();
-  const Resident = route.params ? route.params.Resident : null;
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text1}>사용하실 기능을 선택해주세요</Text>
@@ -14,7 +13,7 @@ function ManageScreen7({route}) {
         style={styles.subContainer}
         activeOpacity={0.7}
         onPress={() => {
-          navigation.navigate('Manage10', {Resident});
+          navigation.navigate('Manage10');
         }}>
         <Text style={styles.text2}>택배수취</Text>
       </TouchableOpacity>
@@ -23,7 +22,7 @@ function ManageScreen7({route}) {
         style={styles.subContainer}
         activeOpacity={0.7}
         onPress={() => {
-          navigation.navigate('Manage13', {Resident});
+          navigation.navigate('Manage14');
         }}>
         <Text style={styles.text2}>택배반송</Text>
       </TouchableOpacity>

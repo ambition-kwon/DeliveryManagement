@@ -20,6 +20,7 @@ export function DataContextProvider({children}) {
     id: '',
     password: '',
   });
+  const [selectedItem, setSelectedItem] = useState();
 
   return (
     <DataContext.Provider
@@ -32,6 +33,8 @@ export function DataContextProvider({children}) {
         setDeliverer,
         Admin,
         setAdmin,
+        selectedItem,
+        setSelectedItem,
       }}>
       {children}
     </DataContext.Provider>

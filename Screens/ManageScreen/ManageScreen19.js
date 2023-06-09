@@ -18,7 +18,12 @@ function ManageScreen19() {
         },
       )
       .then(response => {
-        setData(response.data);
+        if (response.data[0] === '반송 수거 대상 택배가 없습니다.') {
+          setCheck(false);
+        } else {
+          setCheck(true);
+          setData(response.data);
+        }
       })
       .catch(error => {
         console.error('에러:', error);
@@ -27,10 +32,11 @@ function ManageScreen19() {
   const navigation = useNavigation();
   const {Deliverer, token} = useContext(DataContext);
   const [data, setData] = useState();
+  const [check, setCheck] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.text1}>수거하실 택배를 선택해주세요</Text>
-      {data[0] === '반송 수거 대상 택배가 없습니다.' ? null : (
+      {!check ? null : (
         <FlatList
           data={data}
           renderItem={({item}) => {
