@@ -16,7 +16,7 @@ import axios from 'axios';
 
 function ManageScreen6() {
   const navigation = useNavigation();
-  const {setToken, Admin, setAdmin} = useContext(DataContext);
+  const {setToken, Admin, setAdmin, server} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -52,7 +52,7 @@ function ManageScreen6() {
           title={'로그인'}
           onPress={() => {
             axios
-              .post('http://172.20.16.116:8080/managesys/relogin/admin', Admin)
+              .post(`${server}/managesys/relogin/admin`, Admin)
               .then(response => {
                 const val = response.data.accessToken;
                 setToken(`Bearer ${val}`);

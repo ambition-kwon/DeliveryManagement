@@ -5,9 +5,13 @@ import axios from 'axios';
 import DataContext from '../../Contexts/DataContext';
 
 function NoticeScreen2() {
+  const {token, Resident, server} = useContext(DataContext);
+  const [data, setData] = useState([]);
+  const [arrayData, setArrayData] = useState([]);
+
   useEffect(() => {
     axios
-      .post('http://172.20.16.116:8080/notifsys/home', Resident, {
+      .post(`${server}/notifsys/home`, Resident, {
         headers: {
           Authorization: token,
         },
@@ -19,8 +23,13 @@ function NoticeScreen2() {
         console.error('에러:', error);
       });
   }, []);
-  const {token, Resident} = useContext(DataContext);
-  const [data, setData] = useState();
+
+  useEffect(() => {
+    const sortedData = data.sort(
+      (a, b) => new Date(b.localDateTime) - new Date(a.localDateTime),
+    );
+    setArrayData(sortedData);
+  }, [data]);
   const renderItem = ({item}) => {
     return (
       <Item2
@@ -34,7 +43,7 @@ function NoticeScreen2() {
   ////////////////////////////////////////
   return (
     <View style={styles.container}>
-      <FlatList data={data} renderItem={renderItem} style={styles.list} />
+      <FlatList data={arrayData} renderItem={renderItem} style={styles.list} />
     </View>
   );
 }

@@ -8,7 +8,7 @@ import axios from 'axios';
 function NoticeScreen4() {
   useEffect(() => {
     axios
-      .post('http://172.20.16.116:8080/notifsys/home/myInfo', Resident, {
+      .post(`${server}/notifsys/home/myInfo`, Resident, {
         headers: {
           Authorization: token,
         },
@@ -21,7 +21,8 @@ function NoticeScreen4() {
       });
   }, []);
   const navigation = useNavigation();
-  const {setToken, Resident, token, setResident} = useContext(DataContext);
+  const {setToken, Resident, token, setResident, server} =
+    useContext(DataContext);
   const [data, setData] = useState();
   return (
     <View style={styles.container}>

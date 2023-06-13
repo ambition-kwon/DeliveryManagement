@@ -16,7 +16,7 @@ import DataContext from '../../Contexts/DataContext';
 function ManageScreen17({route}) {
   const navigation = useNavigation();
   const {barcodeData} = route.params ? route.params : null;
-  const {token} = useContext(DataContext);
+  const {token, server} = useContext(DataContext);
   const [data, setData] = useState({
     trackingNumber: barcodeData,
     name: '',
@@ -65,15 +65,11 @@ function ManageScreen17({route}) {
           title={'등록'}
           onPress={() => {
             axios
-              .post(
-                'http://172.20.16.116:8080/managesys/deliverer/parcel/registration',
-                data,
-                {
-                  headers: {
-                    Authorization: token,
-                  },
+              .post(`${server}/managesys/deliverer/parcel/registration`, data, {
+                headers: {
+                  Authorization: token,
                 },
-              )
+              })
               .then(response => {
                 navigation.navigate('Manage18');
               })

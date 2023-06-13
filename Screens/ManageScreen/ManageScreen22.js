@@ -14,9 +14,10 @@ import DataContext from '../../Contexts/DataContext';
 import axios from 'axios';
 
 function ManageScreen22() {
+  //최초 화면 렌더링시 실행될 로직
   useEffect(() => {
     axios
-      .post('http://172.20.16.116:8080/managesys/admin/resident/showAll', {
+      .post(`${server}/managesys/admin/resident/showAll`, {
         headers: {
           Authorization: token,
         },
@@ -28,9 +29,10 @@ function ManageScreen22() {
         console.error('에러:', error);
       });
   }, []);
+  //이전화면으로 pop될시 실행될 로직
   useEffect(() => {
     axios
-      .post('http://172.20.16.116:8080/managesys/admin/resident/showAll', {
+      .post(`${server}/managesys/admin/resident/showAll`, {
         headers: {
           Authorization: token,
         },
@@ -44,7 +46,7 @@ function ManageScreen22() {
   }, [navigation]);
   const navigation = useNavigation();
   const [data, setData] = useState();
-  const {token} = useContext(DataContext);
+  const {token, server} = useContext(DataContext);
   const renderItem = ({item}) => {
     return (
       <Item22
@@ -66,26 +68,19 @@ function ManageScreen22() {
                 style: 'destructive',
                 onPress: () => {
                   axios
-                    .post(
-                      'http://172.20.16.116:8080/managesys/admin/resident/delete',
-                      item,
-                      {
-                        headers: {
-                          Authorization: token,
-                        },
+                    .post(`${server}/managesys/admin/resident/delete`, item, {
+                      headers: {
+                        Authorization: token,
                       },
-                    )
+                    })
                     .then(response => {
                       console.log('삭제완료');
                       axios
-                        .post(
-                          'http://172.20.16.116:8080/managesys/admin/resident/showAll',
-                          {
-                            headers: {
-                              Authorization: token,
-                            },
+                        .post(`${server}/managesys/admin/resident/showAll`, {
+                          headers: {
+                            Authorization: token,
                           },
-                        )
+                        })
                         .then(response => {
                           setData(response.data);
                         })

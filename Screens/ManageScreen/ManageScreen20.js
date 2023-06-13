@@ -20,7 +20,7 @@ function ManageScreen20({route}) {
   const [barcodeData, setBarcodeData] = useState(null);
   const navigation = useNavigation();
   const checkBarcode = route.params ? route.params.item.trackingNumber : null;
-  const {token} = useContext(DataContext);
+  const {token, server} = useContext(DataContext);
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
     console.log(result.data);
@@ -55,7 +55,7 @@ function ManageScreen20({route}) {
               if (checkBarcode == barcodeData) {
                 axios
                   .post(
-                    'http://172.20.16.116:8080/managesys/deliverer/parcel/pickup',
+                    `${server}/managesys/deliverer/parcel/pickup`,
                     {trackingNumber: barcodeData},
                     {
                       headers: {

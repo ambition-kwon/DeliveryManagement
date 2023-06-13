@@ -21,6 +21,7 @@ export function DataContextProvider({children}) {
     password: '',
   });
   const [selectedItem, setSelectedItem] = useState();
+  const server = 'http://172.20.25.178:8080';
 
   return (
     <DataContext.Provider
@@ -35,6 +36,7 @@ export function DataContextProvider({children}) {
         setAdmin,
         selectedItem,
         setSelectedItem,
+        server,
       }}>
       {children}
     </DataContext.Provider>

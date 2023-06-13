@@ -9,7 +9,7 @@ function ManageScreen19() {
   useEffect(() => {
     axios
       .post(
-        'http://172.20.16.116:8080/managesys/deliverer/parcel/awaitingReturnList',
+        `${server}/managesys/deliverer/parcel/awaitingReturnList`,
         Deliverer,
         {
           headers: {
@@ -29,8 +29,31 @@ function ManageScreen19() {
         console.error('에러:', error);
       });
   }, []);
+  useEffect(() => {
+    axios
+      .post(
+        `${server}/managesys/deliverer/parcel/awaitingReturnList`,
+        Deliverer,
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
+      .then(response => {
+        if (response.data[0] === '반송 수거 대상 택배가 없습니다.') {
+          setCheck(false);
+        } else {
+          setCheck(true);
+          setData(response.data);
+        }
+      })
+      .catch(error => {
+        console.error('에러:', error);
+      });
+  }, [navigation]);
   const navigation = useNavigation();
-  const {Deliverer, token} = useContext(DataContext);
+  const {Deliverer, token, server} = useContext(DataContext);
   const [data, setData] = useState();
   const [check, setCheck] = useState(false);
   return (

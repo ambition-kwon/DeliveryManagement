@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import LoginCustomButton from '../../Components/LoginCustomButton';
 import RegisterCustomButton from '../../Components/RegisterCustomButton';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
+import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen1() {
   const navigation = useNavigation();
@@ -20,6 +21,7 @@ function ManageScreen1() {
     id: '',
     password: '',
   });
+  const {server} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -55,7 +57,7 @@ function ManageScreen1() {
           title={'로그인'}
           onPress={() => {
             axios
-              .post('http://172.20.16.116:8080/managesys/firstlogin', Admin)
+              .post(`${server}/managesys/firstlogin`, Admin)
               .then(response => {
                 navigation.reset({routes: [{name: 'Manage3'}]});
               })

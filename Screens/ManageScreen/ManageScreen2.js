@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import CustomInput from '../../Components/CustomInput';
 import LoginCustomButton from '../../Components/LoginCustomButton';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
+import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen2() {
   const navigation = useNavigation();
@@ -21,6 +22,7 @@ function ManageScreen2() {
     zipcode: '',
   });
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const {server} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -91,7 +93,7 @@ function ManageScreen2() {
               );
             } else {
               axios
-                .post('http://172.20.16.116:8080/managesys/adminJoin', Admin)
+                .post(`${server}/managesys/adminJoin`, Admin)
                 .then(response => {
                   Alert.alert(
                     '알림',

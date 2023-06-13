@@ -17,7 +17,7 @@ import DataContext from '../../Contexts/DataContext';
 function ManageScreen24() {
   useEffect(() => {
     axios
-      .post('http://172.20.16.116:8080/managesys/admin/parcel/showAll', {
+      .post(`${server}/managesys/admin/parcel/showAll`, {
         headers: {
           Authorization: token,
         },
@@ -29,7 +29,7 @@ function ManageScreen24() {
         console.error('에러:', error);
       });
   }, []);
-  const {token, setSelectedItem} = useContext(DataContext);
+  const {token, setSelectedItem, server} = useContext(DataContext);
   const [data, setData] = useState();
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);

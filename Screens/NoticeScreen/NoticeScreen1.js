@@ -15,7 +15,7 @@ import axios from 'axios';
 
 function NoticeScreen1() {
   const navigation = useNavigation();
-  const {setToken, Resident, setResident, token} = useContext(DataContext);
+  const {setToken, Resident, setResident, server} = useContext(DataContext);
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -64,7 +64,7 @@ function NoticeScreen1() {
           title={'로그인'}
           onPress={() => {
             axios
-              .post('http://172.20.16.116:8080/notifsys/login', Resident)
+              .post(`${server}/notifsys/login`, Resident)
               .then(response => {
                 const val = response.data.accessToken;
                 setToken(`Bearer ${val}`);

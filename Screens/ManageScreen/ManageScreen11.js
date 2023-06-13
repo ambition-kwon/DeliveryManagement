@@ -20,7 +20,7 @@ function ManageScreen11({route}) {
   const [barcodeData, setBarcodeData] = useState(null);
   const navigation = useNavigation();
   const capturedImage = route.params ? route.params.capturedImage : null;
-  const {token, Resident} = useContext(DataContext);
+  const {token, server} = useContext(DataContext);
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
     console.log(result.data);
@@ -54,7 +54,7 @@ function ManageScreen11({route}) {
             onPress={() => {
               axios
                 .post(
-                  'http://172.20.16.116:8080/managesys/resident/delivered/trackingNumber',
+                  `${server}/managesys/resident/delivered/trackingNumber`,
                   {trackingNumber: barcodeData, path: capturedImage},
                   {
                     headers: {

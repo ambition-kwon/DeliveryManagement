@@ -8,7 +8,7 @@ function ShowFace() {
   useEffect(() => {
     axios
       .post(
-        'http://172.20.16.116:8080/managesys/admin/parcel/showAll/image',
+        `${server}/managesys/admin/parcel/showAll/image`,
         {trackingNumber: selectedItem},
         {
           headers: {
@@ -23,7 +23,7 @@ function ShowFace() {
         console.error('에러:', error);
       });
   }, []);
-  const {token} = useContext(DataContext);
+  const {token, server} = useContext(DataContext);
   const {selectedItem} = useContext(DataContext);
   const [data, setData] = useState();
   return (

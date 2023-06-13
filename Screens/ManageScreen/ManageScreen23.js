@@ -14,7 +14,7 @@ import DataContext from '../../Contexts/DataContext';
 
 function ManageScreen23() {
   const navigation = useNavigation();
-  const {token} = useContext(DataContext);
+  const {token, server} = useContext(DataContext);
   const [Resident, setResident] = useState({
     name: '',
     address: '',
@@ -57,15 +57,11 @@ function ManageScreen23() {
             title={'등록완료'}
             onPress={() => {
               axios
-                .post(
-                  'http://172.20.16.116:8080/managesys/admin/resident/create',
-                  Resident,
-                  {
-                    headers: {
-                      Authorization: token,
-                    },
+                .post(`${server}/managesys/admin/resident/create`, Resident, {
+                  headers: {
+                    Authorization: token,
                   },
-                )
+                })
                 .then(response => {
                   console.log('추가완료');
                   navigation.pop();

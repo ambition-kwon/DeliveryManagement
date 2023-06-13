@@ -5,13 +5,13 @@ import axios from 'axios';
 import DataContext from '../../Contexts/DataContext';
 
 function NoticeScreen3() {
-  const {token, Resident} = useContext(DataContext);
+  const {token, Resident, server} = useContext(DataContext);
   const [data, setData] = useState([]);
   const [arrayData, setArrayData] = useState([]);
 
   useEffect(() => {
     axios
-      .post('http://172.20.16.116:8080/notifsys/home/history', Resident, {
+      .post(`${server}/notifsys/home/history`, Resident, {
         headers: {
           Authorization: token,
         },

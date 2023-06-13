@@ -19,7 +19,7 @@ import axios from 'axios';
 function ManageScreen14() {
   const [barcodeData, setBarcodeData] = useState(null);
   const navigation = useNavigation();
-  const {token, Resident} = useContext(DataContext);
+  const {token, server} = useContext(DataContext);
   const handleBarcodeRead = result => {
     setBarcodeData(result.data);
     console.log(result.data);
@@ -53,7 +53,7 @@ function ManageScreen14() {
             onPress={() => {
               axios
                 .post(
-                  'http://172.20.16.116:8080/managesys/resident/awaitingReturn/trackingNumber',
+                  `${server}/managesys/resident/awaitingReturn/trackingNumber`,
                   {trackingNumber: barcodeData},
                   {
                     headers: {
