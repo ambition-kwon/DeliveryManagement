@@ -1,7 +1,7 @@
 # 무인 택배 통합 관리 시스템
 > 스마트폰과 태블릿을 활용한 저비용 통합 배송 관리 플랫폼
 
-![Landing Page](https://github.com/user-attachments/assets/c0b43153-e7fd-42b8-85e5-6e34a9d01023)
+![Landing Page](https://github.com/user-attachments/assets/aa9a5c2d-de1b-4998-99e6-46e4ff72c996)
 
 
 ## 📌 프로젝트 개요
