@@ -1,7 +1,8 @@
 # 대리인 기반의 효과적인 무인 택배 통합 관리 시스템
 > 스마트폰과 태블릿을 활용한 저비용 통합 배송 관리 플랫폼
 
-![Landing Page](https://github.com/user-attachments/assets/86b0c241-7142-4629-8821-573e1fa45a55)
+![Landing Page](https://github.com/user-attachments/assets/c0b43153-e7fd-42b8-85e5-6e34a9d01023)
+
 
 ## 📌 프로젝트 개요
 
