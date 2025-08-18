@@ -143,3 +143,7 @@ https://github.com/user-attachments/assets/ee9ee143-d950-45ec-9432-e35a6b3d605e
 |<img src="https://avatars.githubusercontent.com/u/5442985?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/44336444?v=4" width="150" height="150"/>|
 |:-:|:-:|
 |권혁원<br/>PM / UI·UX / FrontEnd|안예원<br/>BackEnd|
+
+
+## 🏆 수상 내역
+- 2023 교내 컴퓨터공학전공x인공지능전공 작품전시회 **장려상**
