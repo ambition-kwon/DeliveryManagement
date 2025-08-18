@@ -62,24 +62,16 @@
 
 ```
 DeliveryManagement/
-├── Components/                # 재사용 가능한 UI 컴포넌트
-│   ├── CustomInput.js         # 커스텀 입력 필드
-│   ├── LoginCustomButton.js   # 로그인 전용 버튼
-│   ├── RegisterCustomButton.js # 등록 전용 버튼
-│   └── Item*.js              # 다양한 아이템 컴포넌트
-├── Contexts/
-│   └── DataContext.js        # 전역 상태 관리 (토큰, 사용자 정보)
+├── Components/               # 재사용 가능한 UI 컴포넌트
+├── Contexts/                 # 전역 상태 관리(Context-API)
 ├── Screens/
 │   ├── RootStack.js          # 메인 네비게이션 스택
 │   ├── MainTab.js            # 하단 탭 네비게이션
-│   ├── SelectScreen.js       # 시스템 선택 화면
+│   ├── SelectScreen.js       # 시스템 선택 화면(분기)
 │   ├── ManageScreen/         # 관리 시스템 화면들 (27개)
-│   │   ├── ManageScreen1.js  # 관리자 로그인
-│   │   ├── ManageScreen22.js # 거주자 정보 관리
-│   │   ├── ManageScreen26.js # 배송원 정보 관리
-│   │   ├── ShowFace.js       # 안면 인식 화면
 │   │   └── ...
 │   └── NoticeScreen/         # 알림 시스템 화면들 (4개)
+│		└── ...
 ├── assets/                   # 이미지 및 아이콘 리소스
 ```
 
