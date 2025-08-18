@@ -22,7 +22,6 @@
     - 무인 택배함 없이도 안전한 배송 완료 가능
     - 신뢰할 수 있는 대리인(관리사무소)을 통한 택배 수령
     - 스마트폰 앱을 활용한 실시간 정보 공유 및 알림
-
 2.  **디지털 통합 관리 플랫폼**
     - 배송원, 거주자, 대리인 간의 원활한 정보 교환
     - 안면 캡처를 통한 신원 확인 및 보안 강화
@@ -46,7 +45,7 @@
 ![React Navigation](https://img.shields.io/badge/React_Navigation-6B73FF?style=for-the-badge&logo=react&logoColor=white) ![Material Icons](https://img.shields.io/badge/Material_Icons-757575?style=for-the-badge&logo=material-design&logoColor=white)
 
 ### Hardware
-![React Native Camera](https://img.shields.io/badge/RN_Camera-FF6B6B?style=for-the-badge&logo=camera&logoColor=white) ![React Native Sound](https://img.shields.io/badge/RN_Sound-1ED760?style=for-the-badge&logo=spotify&logoColor=white)
+![React Native Camera](https://img.shields.io/badge/RN_Camera-FF6B6B?style=for-the-badge&logo=instagram&logoColor=white) ![React Native Sound](https://img.shields.io/badge/RN_Sound-1ED760?style=for-the-badge&logo=spotify&logoColor=white)
 
 ### Network & State
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white) ![Context API](https://img.shields.io/badge/Context_API-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
