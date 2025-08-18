@@ -125,7 +125,9 @@ DeliveryManagement/
 https://github.com/user-attachments/assets/8d70f4d6-c22f-452f-8b09-e9c4ba66fe8a
 
 </div>
+
 #### 알림 시스템(APP - 거주자 사용)
+
 <div align="center">
 	
 https://github.com/user-attachments/assets/ee9ee143-d950-45ec-9432-e35a6b3d605e
